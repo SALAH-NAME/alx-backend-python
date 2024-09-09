@@ -40,7 +40,7 @@ class TestGithubOrgClient(unittest.TestCase):
     def test_public_repos(self, mock_get_json):
         """test_public_repos function
         """
-        test_payload = [{'name': 'Google'}, {'name': 'Twitter'}]
+        test_payload = [{'name': 'Google'}, {'name': 'google'}]
         mock_get_json.return_value = test_payload
 
         with patch('client.GithubOrgClient._public_repos_url',
