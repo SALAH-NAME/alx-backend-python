@@ -57,18 +57,21 @@ class TestMemoize(unittest.TestCase):
     """TestMemoize Class
     """
 
-    @patch.object(TestClass, 'a_method', return_value=42)
-    def test_memoize(self, mock_method):
+    def test_memoize(self):
         """test_memoize function
         """
-    	class a_method(self):
-            """a_method function"""
-	    return 42
 
-	@memoize
-	def a_property(self):
-            """a_property function"""
-            return self.a_method()
+        class TestClass:
+            """ Test Class for wrapping with memoize """
+
+            def a_method(self):
+                """a_method function"""
+                return 42
+
+            @memoize
+            def a_property(self):
+                """a_property function"""
+                return self.a_method()
 
         with patch.object(TestClass, 'a_method') as mock:
             test_class = TestClass()
