@@ -40,16 +40,19 @@ class TestGithubOrgClient(unittest.TestCase):
     def test_public_repos(self, mock_get_json):
         """test_public_repos function
         """
-        test_payload = [{'name': 'Google'}, {'name': 'T_E'}]
+        test_payload = [{'name': 'Google'}, {'name': 'Twitter'}]
         mock_get_json.return_value = test_payload
 
         with patch('client.GithubOrgClient._public_repos_url',
                    new_callable=PropertyMock) as mock_public_repos_url:
+
             mock_public_repos_url.return_value = 'worold'
-            client = GithubOrgClient('test')
-            result = client.public_repos()
-            names = [i["name"] for i in test_payload]
+            test_class = GithubOrgClient('test')
+            result = test_class.public_repos()
+
+            names = [item["name"] for item in test_payload]
             self.assertEqual(result, names)
+
             mock_public_repos_url.assert_called_once()
             mock_get_json.assert_called_once()
 
